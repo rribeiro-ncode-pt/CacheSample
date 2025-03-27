@@ -1,0 +1,15 @@
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.csproj.AssemblyReference.cache
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.GeneratedMSBuildEditorConfig.editorconfig
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.AssemblyInfoInputs.cache
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.AssemblyInfo.cs
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.csproj.CoreCompileInputs.cache
+W:\CacheSample\CacheSample\bin\Release\net48\App.config
+W:\CacheSample\CacheSample\bin\Release\net48\CacheSample.exe.config
+W:\CacheSample\CacheSample\bin\Release\net48\CacheSample.exe
+W:\CacheSample\CacheSample\bin\Release\net48\CacheSample.pdb
+W:\CacheSample\CacheSample\bin\Release\net48\SqlServerCache.dll
+W:\CacheSample\CacheSample\bin\Release\net48\SqlServerCache.pdb
+W:\CacheSample\CacheSample\bin\Release\net48\SqlServerCache.xml
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.csproj.CopyComplete
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.exe
+W:\CacheSample\CacheSample\obj\Release\net48\CacheSample.pdb

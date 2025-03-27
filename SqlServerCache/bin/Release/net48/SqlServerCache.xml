@@ -1,0 +1,454 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SqlServerCache</name>
+    </assembly>
+    <members>
+        <member name="T:SqlServerCache.Interfaces.IDistributedCache">
+            <summary>
+            Represents a distributed cache that can be shared across multiple servers.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Get``1(System.String)">
+            <summary>
+            Gets an item from the cache with the specified key.
+            </summary>
+            <typeparam name="T">The type of the item.</typeparam>
+            <param name="key">The cache key.</param>
+            <returns>The cached item, or null if the item doesn't exist.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.TryGetValue``1(System.String,``0@)">
+            <summary>
+            Tries to get an item from the cache with the specified key.
+            </summary>
+            <typeparam name="T">The type of the item.</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The cached item if found; otherwise, null.</param>
+            <returns>true if the item was found; otherwise, false.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Set``1(System.String,``0,System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <summary>
+            Adds or replaces an item in the cache with the specified key.
+            </summary>
+            <typeparam name="T">The type of the item.</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="value">The item to cache.</param>
+            <param name="slidingExpiration">The sliding expiration timespan.</param>
+            <param name="absoluteExpiration">The absolute expiration date.</param>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Remove(System.String)">
+            <summary>
+            Removes an item from the cache with the specified key.
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>true if the item was removed; otherwise, false.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Exists(System.String)">
+            <summary>
+            Checks if an item exists in the cache with the specified key.
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>true if the item exists; otherwise, false.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.GetOrAdd``1(System.String,System.Func{``0},System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <summary>
+            Gets an item from the cache or adds it if it doesn't exist.
+            </summary>
+            <typeparam name="T">The type of the item.</typeparam>
+            <param name="key">The cache key.</param>
+            <param name="valueFactory">A function that produces the value if it doesn't exist.</param>
+            <param name="slidingExpiration">The sliding expiration timespan.</param>
+            <param name="absoluteExpiration">The absolute expiration date.</param>
+            <returns>The cached item.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Refresh(System.String)">
+            <summary>
+            Refreshes an item in the cache, resetting its sliding expiration.
+            </summary>
+            <param name="key">The cache key.</param>
+            <returns>true if the item was refreshed; otherwise, false.</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.GetMany``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets multiple items from the cache with the specified keys.
+            </summary>
+            <typeparam name="T">The type of the items.</typeparam>
+            <param name="keys">The cache keys.</param>
+            <returns>A dictionary of keys and their corresponding cached items (if found).</returns>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.SetMany``1(System.Collections.Generic.IDictionary{System.String,``0},System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <summary>
+            Adds or replaces multiple items in the cache.
+            </summary>
+            <typeparam name="T">The type of the items.</typeparam>
+            <param name="items">A dictionary of keys and values to cache.</param>
+            <param name="slidingExpiration">The sliding expiration timespan.</param>
+            <param name="absoluteExpiration">The absolute expiration date.</param>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.FlushExpired">
+            <summary>
+            Removes expired items from the cache.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.Clear">
+            <summary>
+            Removes all items from the cache.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Interfaces.IDistributedCache.GetStatistics">
+            <summary>
+            Gets statistics about the cache.
+            </summary>
+            <returns>Cache statistics.</returns>
+        </member>
+        <member name="T:SqlServerCache.Interfaces.CacheStatistics">
+            <summary>
+            Represents statistics about the cache.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Interfaces.CacheStatistics.ItemCount">
+            <summary>
+            Gets the number of items in the cache.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Interfaces.CacheStatistics.TotalSizeBytes">
+            <summary>
+            Gets the total size of all cached items in bytes.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Interfaces.CacheStatistics.ExpiringWithin10Minutes">
+            <summary>
+            Gets the number of items that are expiring soon.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Interfaces.CacheStatistics.CacheHitRatio">
+            <summary>
+            Gets the cache hit ratio (hits / (hits + misses)).
+            </summary>
+        </member>
+        <member name="T:SqlServerCache.Models.CacheItem">
+            <summary>
+            Represents a cache item stored in the SQL Server distributed cache.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.Id">
+            <summary>
+            Gets or sets the primary key identifier.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.CacheKey">
+            <summary>
+            Gets or sets the cache key.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.Value">
+            <summary>
+            Gets or sets the serialized value.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.ExpiresAtTime">
+            <summary>
+            Gets or sets the expiration date and time.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.SlidingExpiration">
+            <summary>
+            Gets or sets a value indicating whether sliding expiration is enabled.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.AbsoluteExpiration">
+            <summary>
+            Gets or sets the absolute expiration date and time.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.LastAccessTime">
+            <summary>
+            Gets or sets the last time the item was accessed.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheItem.CreatedTime">
+            <summary>
+            Gets or sets the time the item was created.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Models.CacheItem.IsExpired">
+            <summary>
+            Determines if the cache item is expired.
+            </summary>
+            <returns>true if the item is expired; otherwise, false.</returns>
+        </member>
+        <member name="M:SqlServerCache.Models.CacheItem.UpdateExpirationForSliding(System.TimeSpan)">
+            <summary>
+            Updates the expiration time for sliding expiration.
+            </summary>
+            <param name="slidingExpirationInterval">The sliding expiration interval.</param>
+        </member>
+        <member name="T:SqlServerCache.Models.CacheOptions">
+            <summary>
+            Represents configuration options for the SQL Server distributed cache.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.TableName">
+            <summary>
+            Gets or sets the table name for the cache. Default is "DistributedCache".
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.SchemaName">
+            <summary>
+            Gets or sets the schema name for the cache table. Default is "dbo".
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.CommandTimeout">
+            <summary>
+            Gets or sets the command timeout in seconds. Default is 30 seconds.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.EnableCompression">
+            <summary>
+            Gets or sets a value indicating whether compression is enabled. Default is true.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.DefaultSlidingExpiration">
+            <summary>
+            Gets or sets the default sliding expiration for cache items.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.DefaultAbsoluteExpiration">
+            <summary>
+            Gets or sets the default absolute expiration for cache items.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.AutoCleanup">
+            <summary>
+            Gets or sets a value indicating whether automatic cleanup of expired items is enabled. Default is true.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.CleanupInterval">
+            <summary>
+            Gets or sets the cleanup interval for expired items. Default is 5 minutes.
+            </summary>
+        </member>
+        <member name="P:SqlServerCache.Models.CacheOptions.FullTableName">
+            <summary>
+            Gets or sets the fully qualified cache table name.
+            </summary>
+        </member>
+        <member name="T:SqlServerCache.Serialization.BinaryFormatterSerializer">
+            <summary>
+            Serializes and deserializes objects using the BinaryFormatter.
+            Note: Objects must be marked with the [Serializable] attribute.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Serialization.BinaryFormatterSerializer.Serialize``1(``0)">
+            <summary>
+            Serializes an object to a byte array using BinaryFormatter.
+            </summary>
+            <typeparam name="T">The type of the object to serialize.</typeparam>
+            <param name="value">The object to serialize.</param>
+            <returns>A byte array containing the serialized object.</returns>
+        </member>
+        <member name="M:SqlServerCache.Serialization.BinaryFormatterSerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes a byte array to an object using BinaryFormatter.
+            </summary>
+            <typeparam name="T">The type of the object to deserialize to.</typeparam>
+            <param name="data">The byte array to deserialize.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="T:SqlServerCache.Serialization.ICacheSerializer">
+            <summary>
+            Defines methods for serializing and deserializing cache items.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Serialization.ICacheSerializer.Serialize``1(``0)">
+            <summary>
+            Serializes an object to a byte array.
+            </summary>
+            <typeparam name="T">The type of the object to serialize.</typeparam>
+            <param name="value">The object to serialize.</param>
+            <returns>A byte array containing the serialized object.</returns>
+        </member>
+        <member name="M:SqlServerCache.Serialization.ICacheSerializer.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes a byte array to an object.
+            </summary>
+            <typeparam name="T">The type of the object to deserialize to.</typeparam>
+            <param name="data">The byte array to deserialize.</param>
+            <returns>The deserialized object.</returns>
+        </member>
+        <member name="T:SqlServerCache.SqlServerDistributedCache">
+            <summary>
+            Distributed cache implementation using SQL Server as the backing store.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.#ctor(System.String,SqlServerCache.Models.CacheOptions,SqlServerCache.Serialization.ICacheSerializer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SqlServerCache.SqlServerDistributedCache"/> class.
+            </summary>
+            <param name="connectionString">The connection string to the SQL Server database.</param>
+            <param name="options">The cache options. If null, default options will be used.</param>
+            <param name="serializer">The serializer to use. If null, a BinaryFormatter serializer will be used.</param>
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Get``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.TryGetValue``1(System.String,``0@)">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Set``1(System.String,``0,System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Remove(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Exists(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.GetOrAdd``1(System.String,System.Func{``0},System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Refresh(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.GetMany``1(System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.SetMany``1(System.Collections.Generic.IDictionary{System.String,``0},System.Nullable{System.TimeSpan},System.Nullable{System.DateTimeOffset})">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.FlushExpired">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.GetStatistics">
+            <inheritdoc />
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Dispose">
+            <summary>
+            Disposes the resources used by the instance.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.SqlServerDistributedCache.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by the instance.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:SqlServerCache.Utils.ConcurrencyHelper">
+            <summary>
+            Provides methods for distributed locking using SQL Server.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Utils.ConcurrencyHelper.ExecuteWithLock``1(System.Data.SqlClient.SqlConnection,System.String,System.Func{``0},System.Nullable{System.TimeSpan})">
+            <summary>
+            Executes an action within a distributed lock using SQL Server's sp_getapplock.
+            </summary>
+            <typeparam name="T">The return type of the action.</typeparam>
+            <param name="connection">The SQL connection.</param>
+            <param name="lockKey">The key for the lock resource.</param>
+            <param name="action">The action to execute within the lock.</param>
+            <param name="timeout">The timeout period for acquiring the lock.</param>
+            <returns>The result of the action.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.ConcurrencyHelper.ExecuteWithLockAsync``1(System.Data.SqlClient.SqlConnection,System.String,System.Func{System.Threading.Tasks.Task{``0}},System.Nullable{System.TimeSpan})">
+            <summary>
+            Executes an action within a distributed lock using SQL Server's sp_getapplock asynchronously.
+            </summary>
+            <typeparam name="T">The return type of the action.</typeparam>
+            <param name="connection">The SQL connection.</param>
+            <param name="lockKey">The key for the lock resource.</param>
+            <param name="action">The action to execute within the lock.</param>
+            <param name="timeout">The timeout period for acquiring the lock.</param>
+            <returns>A task that represents the asynchronous operation.</returns>
+        </member>
+        <member name="T:SqlServerCache.Utils.SqlScripts">
+            <summary>
+            Contains SQL scripts for cache operations.
+            </summary>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetCreateTableScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to create the cache table.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to create the cache table.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetGetItemScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to get an item from the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to get an item from the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetSetItemScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to set an item in the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to set an item in the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetRemoveItemScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to remove an item from the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to remove an item from the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetExistsItemScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to check if an item exists in the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to check if an item exists in the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetRefreshItemScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to refresh an item in the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to refresh an item in the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetRemoveExpiredItemsScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to remove expired items from the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to remove expired items from the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetClearScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to clear all items from the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to clear all items from the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetGetManyItemsScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to get multiple items from the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to get multiple items from the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetStatisticsScript(SqlServerCache.Models.CacheOptions)">
+            <summary>
+            Gets the script to get statistics about the cache.
+            </summary>
+            <param name="options">The cache options.</param>
+            <returns>The SQL script to get statistics about the cache.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetAcquireLockScript">
+            <summary>
+            Gets the script to acquire a lock.
+            </summary>
+            <returns>The SQL script to acquire a lock.</returns>
+        </member>
+        <member name="M:SqlServerCache.Utils.SqlScripts.GetReleaseLockScript">
+            <summary>
+            Gets the script to release a lock.
+            </summary>
+            <returns>The SQL script to release a lock.</returns>
+        </member>
+    </members>
+</doc>

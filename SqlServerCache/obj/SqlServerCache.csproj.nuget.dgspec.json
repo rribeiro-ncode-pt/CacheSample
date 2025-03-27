@@ -1,0 +1,52 @@
+{
+  "format": 1,
+  "restore": {
+    "W:\\CacheSample\\SqlServerCache\\SqlServerCache.csproj": {}
+  },
+  "projects": {
+    "W:\\CacheSample\\SqlServerCache\\SqlServerCache.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "W:\\CacheSample\\SqlServerCache\\SqlServerCache.csproj",
+        "projectName": "SqlServerCache",
+        "projectPath": "W:\\CacheSample\\SqlServerCache\\SqlServerCache.csproj",
+        "packagesPath": "D:\\packages\\NuGet\\cache",
+        "outputPath": "W:\\CacheSample\\SqlServerCache\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\RuiRibeiro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.114\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
