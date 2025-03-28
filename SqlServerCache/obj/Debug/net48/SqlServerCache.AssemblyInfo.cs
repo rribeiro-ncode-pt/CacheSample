@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A SQL Server-based distributed cache implementation for .NET Framework 4.8")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70f0efea838c1ca32bbeba8f146f29df199c14ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("SqlServerCache")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SqlServerCache")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

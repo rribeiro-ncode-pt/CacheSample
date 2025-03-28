@@ -1,3 +1,30 @@
+# Existing exclusions
 *.bat
 prompt.md
 *.ps1
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Binary files
+*.exe
+*.dll
+*.pdb
+
+# .NET specific
+*.cache
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.CopyComplete
+*.FileListAbsolute.txt
+*.AssemblyInfoInputs.cache
+*.assets.cache
+*.nuget.cache
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+
+# VS specific
+.vs/

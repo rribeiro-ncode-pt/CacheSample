@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("A console application demonstrating SQL Server distributed cache usage")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+70f0efea838c1ca32bbeba8f146f29df199c14ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("CacheSample")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CacheSample")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
